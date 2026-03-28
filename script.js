@@ -9,21 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 await navigator.clipboard.writeText(fullUsername);
                 const originalText = copyBtn.innerText;
-                copyBtn.innerText = '✅ скопировано!';
-                copyBtn.style.background = '#2a2a2a';
-                copyBtn.style.borderColor = '#5eff5e';
+                copyBtn.innerText = '✓ СКОПИРОВАНО!';
+                copyBtn.style.background = '#111';
+                copyBtn.style.borderColor = '#ff5555';
                 
                 setTimeout(() => {
                     copyBtn.innerText = originalText;
-                    copyBtn.style.background = '#1e1e1e';
-                    copyBtn.style.borderColor = '#3a3a3a';
+                    copyBtn.style.background = '#0a0a0a';
+                    copyBtn.style.borderColor = '#2a2a2a';
                 }, 1800);
             } catch (err) {
-                copyBtn.innerText = '❌ ошибка';
+                copyBtn.innerText = '✗ ОШИБКА';
                 setTimeout(() => {
-                    copyBtn.innerText = 'копировать юзернейм';
+                    copyBtn.innerText = 'КОПИРОВАТЬ ЮЗЕРНЕЙМ';
                 }, 1000);
-                console.warn('copy failed', err);
             }
         });
     }
@@ -42,42 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cards.forEach(card => {
         card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.4s ease';
+        card.style.transform = 'translateY(15px)';
+        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
         observer.observe(card);
     });
-
-    // Дополнительный эффект для ссылки контакта (защита от ботов / просто стиль)
-    const contactLink = document.getElementById('contactLink');
-    if (contactLink) {
-        contactLink.addEventListener('click', (e) => {
-            console.log('Переход на контакт @petlyavk');
-        });
-    }
-
-    // Динамический глитч-эффект для заголовка по таймеру (искусственная "помеха")
-    let glitchInterval;
-    const glitchElement = document.querySelector('.glitch');
-    if (glitchElement) {
-        let activeGlitch = false;
-        const triggerRandomGlitch = () => {
-            if (!activeGlitch && Math.random() < 0.25) {
-                activeGlitch = true;
-                glitchElement.style.animation = 'glitch-anim 0.2s infinite';
-                setTimeout(() => {
-                    glitchElement.style.animation = '';
-                    activeGlitch = false;
-                }, 200);
-            }
-        };
-        glitchInterval = setInterval(triggerRandomGlitch, 4000);
-    }
-
-    // Обработка кнопки создателя - можно дополнительно логировать, но ссылка уже есть
-    const creatorBtn = document.querySelector('.creator-btn');
-    if (creatorBtn) {
-        creatorBtn.addEventListener('click', () => {
-            // просто переход на t.me/morozfp
-        });
-    }
 });
